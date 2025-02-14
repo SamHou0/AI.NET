@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace AI.NET.File
 {
-    static class Settings
+    internal static class Settings
     {
         private static readonly string settingsPath =
             AppDomain.CurrentDomain.BaseDirectory + "\\settings.json";
@@ -55,14 +50,15 @@ namespace AI.NET.File
         {
             using (StreamReader reader = new(settingsPath))
             {
-                SettingsModel model = 
-                    JsonSerializer.Deserialize<SettingsModel>(reader.ReadToEnd())??
-                    throw new FileFormatException(new Uri(settingsPath),"Error reading settings");
+                SettingsModel model =
+                    JsonSerializer.Deserialize<SettingsModel>(reader.ReadToEnd()) ??
+                    throw new FileFormatException(new Uri(settingsPath), "Error reading settings");
                 return model;
             }
         }
     }
-    class SettingsModel
+
+    internal class SettingsModel
     {
         public required Network.AI.OpenAI OpenAI { get; set; }
         public required Network.AI.Mem0 Mem0 { get; set; }

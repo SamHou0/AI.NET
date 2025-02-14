@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using AI.NET.File;
-using HandyControl.Controls;
+﻿using AI.NET.File;
 
 namespace AI.NET.Windows
 {
@@ -25,8 +11,8 @@ namespace AI.NET.Windows
         {
             InitializeComponent();
             Settings.SaveSettings(Settings.GetCurrentSettings());
-            mem0OptionGrid.DataContext = Service.AI.Mem0;
-            openAIOptionGrid.DataContext= Service.AI.OpenAI;
+            mem0GroupBox.DataContext = Service.AI.Mem0;
+            opanAIGroupBox.DataContext = Service.AI.OpenAI;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

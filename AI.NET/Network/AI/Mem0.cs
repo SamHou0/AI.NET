@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace AI.NET.Network.AI
 {
@@ -17,7 +13,7 @@ namespace AI.NET.Network.AI
         private string? _baseUrl;
         public string BaseUrl
         {
-            get => _baseUrl??"";
+            get => _baseUrl ?? "";
             set { _baseUrl = value; OnPropertyChanged(nameof(BaseUrl)); }
         }
 

@@ -4,40 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AI.NET"
-        xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:ai="clr-namespace:AI.NET.Network.AI" 
-        mc:Ignorable="d"
+        xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:ai="clr-namespace:AI.NET.Network.AI"
+           mc:Ignorable="d"
         Closing="Window_Closing"
-        Title="Setting" Height="450" Width="800">
+        Title="Setting" Height="450" Width="500">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid x:Name="mem0OptionGrid" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label>Mem0 Server URL</Label>
-            <TextBox Margin="10" Grid.Column="1" x:Name="mem0BaseURL" Text="{Binding BaseUrl}" Height="50" MaxLines="1"/>
-        </Grid>
-        <Grid x:Name="openAIOptionGrid" Grid.Column="1" d:DataContext="{d:DesignInstance Type=ai:OpenAI}">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label>OpanAI Api Key</Label>
-            <TextBox Margin="10" Grid.Column="1" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
-            <Label Grid.Row="1">OpenAI model</Label>
-            <TextBox Margin="10" Grid.Row="1" Grid.Column="1" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
-        </Grid>
+        <StackPanel hc:TitleElement.TitleWidth="200">
+            <GroupBox x:Name="mem0GroupBox" Header="Mem0" Margin="10" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
+                <StackPanel>
+                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="Mem0 Server URL" Margin="10" x:Name="mem0BaseURL" Text="{Binding BaseUrl}" Height="50" MaxLines="1"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="opanAIGroupBox" Header="OpenAI" Margin="10" d:DataContext="{d:DesignInstance Type=ai:OpenAI}">
+                <StackPanel>
+                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpanAI Api Key" Margin="10" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
+                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI model" Margin="10" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+
     </Grid>
 </hc:Window>

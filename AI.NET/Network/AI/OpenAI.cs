@@ -1,15 +1,7 @@
-﻿using OpenAI.Chat;
+﻿using MdXaml;
 using OpenAI;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using OpenAI.Chat;
 using System.ClientModel;
-using MdXaml;
 using System.ComponentModel;
 
 namespace AI.NET.Network.AI

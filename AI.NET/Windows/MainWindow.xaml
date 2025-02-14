@@ -13,24 +13,22 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button x:Name="settingButton" Click="SettingButton_Click">Setting</Button>
-            <Button x:Name="aboutButton" Click="AboutButton_Click" Grid.Row="1">About</Button>
+            <StackPanel>
+                <Button x:Name="settingButton" Click="SettingButton_Click" Margin="5">Setting</Button>
+            <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5">About</Button>
+            </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="40"/>
-
             </Grid.RowDefinitions>
-            <TextBox x:Name="userInputBox" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"/>
-            <mdxam:MarkdownScrollViewer xml:space="preserve" x:Name="outputBox" Grid.Row="1" ></mdxam:MarkdownScrollViewer>
-            <Grid Grid.Row="2">
+            <mdxam:MarkdownScrollViewer xml:space="preserve" x:Name="outputBox" Grid.Row="0" ></mdxam:MarkdownScrollViewer>
+            <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource DarkDefaultBrush}" Height="5"/>
+            <TextBox x:Name="userInputBox" Grid.Row="2" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Left"/>
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -42,7 +40,6 @@
                 </StackPanel>
                 <Button x:Name="clearButton" Grid.Column="1" Content="Clear(_C)" Click="ClearButton_Click"/>
                 <Button x:Name="clearContextButton" Grid.Column="2" Content="Clear Context(_T)" Click="ClearContextButton_Click"/>
-
             </Grid>
         </Grid>
     </Grid>

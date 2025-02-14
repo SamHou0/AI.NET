@@ -1,24 +1,6 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using OpenAI.Chat;
-using Microsoft.VisualBasic;
-using OpenAI;
-using System.ClientModel;
-using MdXaml;
-using System.Diagnostics;
-using AI.NET.Network.AI;
-using AI.NET.Service;
+﻿using AI.NET.File;
 using HandyControl.Controls;
-using AI.NET.File;
-using AI.NET.Windows;
+using System.Windows;
 
 namespace AI.NET.Windows
 {
@@ -49,11 +31,6 @@ namespace AI.NET.Windows
 
             SetBusyState(false);
         }
-        #region AI
-
-
-
-        #endregion
         private async void Window_Initialized(object sender, EventArgs e)
         {
         }
