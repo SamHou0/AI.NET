@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: cd ./AI.NET && dotnet publish --output '${{ env.PUBLISH_PATH }}'
+      run: dotnet publish --output '${{ env.PUBLISH_PATH }}'
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       with:
