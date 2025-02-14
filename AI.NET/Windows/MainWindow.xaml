@@ -1,0 +1,47 @@
+﻿<hc:Window x:Class="AI.NET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="AI.NET" Height="450" Width="800" Initialized="Window_Initialized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="settingButton" Click="SettingButton_Click">Setting</Button>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="40"/>
+
+            </Grid.RowDefinitions>
+            <TextBox x:Name="userInputBox" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <mdxam:MarkdownScrollViewer xml:space="preserve" x:Name="outputBox" Grid.Row="1" ></mdxam:MarkdownScrollViewer>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="sendButton" Grid.Column="0" Content="Send(_S)" Click="SendButton_Click" IsDefault="True"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30" Width="30" Margin="10,0,0,0">
+                    <hc:LoadingCircle x:Name="loadingCircle" Height="30" Width="30"/>
+                </StackPanel>
+                <Button x:Name="clearButton" Grid.Column="1" Content="Clear(_C)" Click="ClearButton_Click"/>
+                <Button x:Name="clearContextButton" Grid.Column="2" Content="Clear Context(_T)" Click="ClearContextButton_Click"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</hc:Window>

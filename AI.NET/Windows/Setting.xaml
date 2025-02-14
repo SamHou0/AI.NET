@@ -1,0 +1,43 @@
+﻿<hc:Window x:Class="AI.NET.Setting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AI.NET"
+        xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:ai="clr-namespace:AI.NET.Network.AI" 
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="Setting" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="mem0OptionGrid" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label>Mem0 Server URL</Label>
+            <TextBox Margin="10" Grid.Column="1" x:Name="mem0BaseURL" Text="{Binding BaseUrl}" Height="50" MaxLines="1"/>
+        </Grid>
+        <Grid x:Name="openAIOptionGrid" Grid.Column="1" d:DataContext="{d:DesignInstance Type=ai:OpenAI}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label>OpanAI Api Key</Label>
+            <TextBox Margin="10" Grid.Column="1" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
+            <Label Grid.Row="1">OpenAI model</Label>
+            <TextBox Margin="10" Grid.Row="1" Grid.Column="1" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
+        </Grid>
+    </Grid>
+</hc:Window>
