@@ -18,8 +18,9 @@ using AI.NET.Network.AI;
 using AI.NET.Service;
 using HandyControl.Controls;
 using AI.NET.File;
+using AI.NET.Windows;
 
-namespace AI.NET
+namespace AI.NET.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -84,6 +85,12 @@ namespace AI.NET
             window.ShowDialog();
             Settings.ApplySettings(Settings.ReadSettings());
             Growl.Success("Settings saved and applied!");
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            About window = new About();
+            window.ShowDialog();
         }
     }
 }

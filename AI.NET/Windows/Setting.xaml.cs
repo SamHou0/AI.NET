@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using AI.NET.File;
 using HandyControl.Controls;
 
-namespace AI.NET
+namespace AI.NET.Windows
 {
     /// <summary>
     /// Setting.xaml 的交互逻辑
