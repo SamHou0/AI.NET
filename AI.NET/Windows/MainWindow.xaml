@@ -6,7 +6,8 @@
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="AI.NET" Height="450" Width="800" Initialized="Window_Initialized">
+        Activated="Window_Activated"
+        Title="AI.NET" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>

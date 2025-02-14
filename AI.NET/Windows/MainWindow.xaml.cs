@@ -14,7 +14,6 @@ namespace AI.NET.Windows
         {
             InitializeComponent();
             loadingCircle.Visibility = Visibility.Hidden;
-            Settings.ApplySettings(Settings.ReadSettings());
         }
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
@@ -31,8 +30,13 @@ namespace AI.NET.Windows
 
             SetBusyState(false);
         }
-        private async void Window_Initialized(object sender, EventArgs e)
+        private void Window_Activated(object sender, EventArgs e)
         {
+            if (Settings.SettingsExist)
+                Settings.ApplySettings(Settings.ReadSettings());
+            else
+                Growl.Warning(new()
+                { StaysOpen = true, Message = "Please set your AI in the Settings first!" });
         }
         /// <summary>
         /// Set the busy state of the UI
