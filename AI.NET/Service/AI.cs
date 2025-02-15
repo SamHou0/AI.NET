@@ -22,8 +22,9 @@ namespace AI.NET.Service
         /// <param name="outputBox">The UI element to update</param>
         public static async Task RequestAIAsync(string message, MarkdownScrollViewer outputBox)
         {
-            await HandleMemoryAsync(message);
             messages.Add(new UserChatMessage(message));
+            if (Mem0.IsEnabled)
+                await HandleMemoryAsync(message);
             messages.Add(new AssistantChatMessage(
                 await OpenAI.GenerateReplyAsync(outputBox)));
         }
@@ -31,7 +32,6 @@ namespace AI.NET.Service
         private static async Task HandleMemoryAsync(string message)
         {
             // First search in memories
-            messages.Add(new UserChatMessage(message));
             string memoryString = await Mem0.SearchMemoryAsync(message, "default_user");
             // Add Memory, no need to wait
             Mem0.AddMemoryAsync(message, "default_user");

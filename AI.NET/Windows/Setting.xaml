@@ -9,21 +9,22 @@
         Closing="Window_Closing"
         Title="Setting" Height="450" Width="500">
     <Grid>
-        <StackPanel hc:TitleElement.TitleWidth="200">
-            <GroupBox x:Name="mem0GroupBox" Header="Mem0" Margin="10" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
-                <StackPanel>
-                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="Mem0 Server URL" Margin="10" x:Name="mem0BaseURL" Text="{Binding BaseUrl}" Height="50" MaxLines="1"/>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox x:Name="opanAIGroupBox" Header="OpenAI" Margin="10" d:DataContext="{d:DesignInstance Type=ai:OpenAI}">
-                <StackPanel>
-                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpanAI Api Key" Margin="10" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
-                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI model" Margin="10" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
-                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI Base URL" Margin="10" x:Name="openAIBaseUrlBox" Text="{Binding EndPoint}" Height="50" MaxLines="1"/>
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
-
-
+        <hc:ScrollViewer>
+            <StackPanel hc:TitleElement.TitleWidth="200">
+                <GroupBox x:Name="mem0GroupBox" Header="Mem0" Margin="10" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
+                    <StackPanel>
+                        <CheckBox Margin="10" IsChecked="{Binding IsEnabled}">Use Mem0</CheckBox>
+                        <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="Mem0 Server URL" Margin="10" x:Name="mem0BaseURL" Text="{Binding BaseUrl}" Height="50" MaxLines="1"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox x:Name="opanAIGroupBox" Header="OpenAI" Margin="10" d:DataContext="{d:DesignInstance Type=ai:OpenAI}">
+                    <StackPanel>
+                        <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpanAI Api Key" Margin="10" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
+                        <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI model" Margin="10" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
+                        <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI Base URL" Margin="10" x:Name="openAIBaseUrlBox" Text="{Binding EndPoint}" Height="50" MaxLines="1"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </hc:ScrollViewer>
     </Grid>
 </hc:Window>

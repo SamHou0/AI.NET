@@ -11,12 +11,17 @@ namespace AI.NET.Network.AI
     internal class Mem0 : INotifyPropertyChanged
     {
         private string? _baseUrl;
+        private bool _isEnabled;
         public string BaseUrl
         {
             get => _baseUrl ?? "";
             set { _baseUrl = value; OnPropertyChanged(nameof(BaseUrl)); }
         }
-
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set { _isEnabled = value; OnPropertyChanged(nameof(IsEnabled)); }
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -25,6 +30,7 @@ namespace AI.NET.Network.AI
 
         public async void AddMemoryAsync(string message, string user_id)
         {
+            if(!IsEnabled) throw new InvalidOperationException("Mem0 is not enabled");
             RequestBody requestBody = new RequestBody()
             { message = message, user_id = user_id };
             //POST request
@@ -46,6 +52,7 @@ namespace AI.NET.Network.AI
         /// <returns>The API's respond representing related memories</returns>
         public async Task<string> SearchMemoryAsync(string message, string user_id)
         {
+            if(!IsEnabled) throw new InvalidOperationException("Mem0 is not enabled");
             RequestBody requestBody = new RequestBody()
             { message = message, user_id = user_id };
             //POST request
