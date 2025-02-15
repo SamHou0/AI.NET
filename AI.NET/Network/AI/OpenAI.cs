@@ -26,9 +26,7 @@ namespace AI.NET.Network.AI
         /// <summary>
         /// Custom AI endpoint for environment variable, default is OpenAI's endpoint
         /// </summary>
-        private readonly Uri endPoint =
-    new Uri(Environment.GetEnvironmentVariable("OPENAI_BASE_URL") ??
-        "https://api.openai.com");
+        private Uri? _endPoint;
         // Model info
         private ApiKeyCredential? _aiCredential;
         private string? _modelName;
@@ -52,6 +50,21 @@ namespace AI.NET.Network.AI
                 // No need to update if the input key is empty
             }
         }
+        public string EndPoint
+        {
+            get
+            {
+                if (_endPoint is null) return "https://api.openai.com/v1";
+                return _endPoint.AbsoluteUri;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    _endPoint = new(value);
+                OnPropertyChanged(nameof(AiCredential));
+                // No need to update if the input endpoint is empty
+            }
+        }
         public string ModelName
         {
             get => _modelName ?? "gpt-4o";
@@ -65,7 +78,7 @@ namespace AI.NET.Network.AI
         {
             OpenAIClientOptions options = new()
             {
-                Endpoint = endPoint
+                Endpoint = _endPoint
             };
             ChatClient client = new(ModelName, _aiCredential, options);
             string message = "";

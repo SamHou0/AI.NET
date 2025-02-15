@@ -19,6 +19,7 @@
                 <StackPanel>
                     <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpanAI Api Key" Margin="10" x:Name="openAIApiKeyBox" Text="{Binding AiCredential}" Height="50" MaxLines="1"/>
                     <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI model" Margin="10" x:Name="openAIModelBox" Text="{Binding ModelName}" Height="50" MaxLines="1"/>
+                    <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="OpenAI Base URL" Margin="10" x:Name="openAIBaseUrlBox" Text="{Binding EndPoint}" Height="50" MaxLines="1"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
