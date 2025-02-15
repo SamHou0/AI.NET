@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using AI.NET.Logger;
+using System.IO;
 using System.Text.Json;
 
 namespace AI.NET.File
@@ -36,9 +37,18 @@ namespace AI.NET.File
         public static void SaveSettings(SettingsModel model)
         {
             // Save settings to file
-            using (StreamWriter writer = new(settingsPath))
+            try
             {
-                writer.Write(JsonSerializer.Serialize(model));
+
+                using (StreamWriter writer = new(settingsPath))
+                {
+                    writer.Write(JsonSerializer.Serialize(model));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error saving settings", ex);
+                throw;
             }
         }
         /// <summary>
@@ -48,12 +58,20 @@ namespace AI.NET.File
         /// <exception cref="FileFormatException">The setting file is invalid</exception>
         public static SettingsModel ReadSettings()
         {
-            using (StreamReader reader = new(settingsPath))
+            try
             {
-                SettingsModel model =
-                    JsonSerializer.Deserialize<SettingsModel>(reader.ReadToEnd()) ??
-                    throw new FileFormatException(new Uri(settingsPath), "Error reading settings");
-                return model;
+                using (StreamReader reader = new(settingsPath))
+                {
+                    SettingsModel model =
+                        JsonSerializer.Deserialize<SettingsModel>(reader.ReadToEnd()) ??
+                        throw new FileFormatException(new Uri(settingsPath), "Error reading settings");
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error reading settings", ex);
+                throw;
             }
         }
     }

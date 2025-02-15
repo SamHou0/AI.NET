@@ -9,7 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Logger\Log4Net.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logger\Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.5.1" />
+    <PackageReference Include="log4net" Version="3.0.3" />
     <PackageReference Include="MdXaml" Version="1.27.0" />
     <PackageReference Include="OpenAI" Version="2.1.0" />
   </ItemGroup>

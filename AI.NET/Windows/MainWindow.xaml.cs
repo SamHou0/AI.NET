@@ -1,4 +1,5 @@
 ﻿using AI.NET.File;
+using AI.NET.Logger;
 using HandyControl.Controls;
 using System.Windows;
 
@@ -29,7 +30,10 @@ namespace AI.NET.Windows
             try
             { await Service.AI.RequestAIAsync(input, outputBox); }
             catch (Exception ex)
-            { Growl.Error(new() { StaysOpen = true, Message = ex.Message }); }
+            {
+                Growl.Error(new() { StaysOpen = true, Message = ex.Message });
+                Log.Error("Error when requesting AI", ex);
+            }
 
             outputBox.Markdown += markdownNewLine;
             SetBusyState(false);
@@ -70,6 +74,7 @@ namespace AI.NET.Windows
             window.ShowDialog();
             Settings.ApplySettings(Settings.ReadSettings());
             Growl.Success("Settings saved and applied!");
+            Log.Info("Settings saved and applied");
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
