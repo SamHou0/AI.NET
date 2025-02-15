@@ -74,7 +74,7 @@ namespace AI.NET.Network.AI
         /// Generate AI reply, store the message in the global message storage
         /// </summary>
         /// <returns></returns>
-        public async Task GenerateReplyAsync(MarkdownScrollViewer outputBox)
+        public async Task<string> GenerateReplyAsync(MarkdownScrollViewer outputBox)
         {
             OpenAIClientOptions options = new()
             {
@@ -90,7 +90,7 @@ namespace AI.NET.Network.AI
                     message += update.ContentUpdate[0].Text;
                 }
             }
-            Service.AI.messages.Add(new AssistantChatMessage(message));
+            return message;
         }
     }
 }

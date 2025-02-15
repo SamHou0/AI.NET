@@ -20,14 +20,18 @@ namespace AI.NET.Windows
         {
             if (string.IsNullOrWhiteSpace(userInputBox.Text))
                 return;
-
             SetBusyState(true);
-
             outputBox.Markdown += "User:" + userInputBox.Text + markdownNewLine;
             outputBox.Markdown += "AI:";
-            await Service.AI.RequestAIAsync(userInputBox.Text, outputBox);
-            outputBox.Markdown += markdownNewLine;
+            string input = userInputBox.Text;
+            userInputBox.Text = string.Empty;
+            // Request AI
+            try
+            { await Service.AI.RequestAIAsync(input, outputBox); }
+            catch (Exception ex)
+            { Growl.Error(new() { StaysOpen = true, Message = ex.Message }); }
 
+            outputBox.Markdown += markdownNewLine;
             SetBusyState(false);
         }
         private void Window_Activated(object sender, EventArgs e)

@@ -24,7 +24,8 @@ namespace AI.NET.Service
         {
             await HandleMemoryAsync(message);
             messages.Add(new UserChatMessage(message));
-            await OpenAI.GenerateReplyAsync(outputBox);
+            messages.Add(new AssistantChatMessage(
+                await OpenAI.GenerateReplyAsync(outputBox)));
         }
 
         private static async Task HandleMemoryAsync(string message)
