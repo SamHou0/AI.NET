@@ -11,6 +11,10 @@
         Initialized="Window_Initialized"
         Title="About" Height="450" Width="800">
     <Grid>
-        <mdxam:MarkdownScrollViewer x:Name="aboutBox" ></mdxam:MarkdownScrollViewer>
+        <mdxam:MarkdownScrollViewer Style="{StaticResource FlowDocumentScrollViewerBaseStyle}" x:Name="aboutBox" ClickAction="OpenBrowser" Syntax="Standard" >
+            <mdxam:MarkdownScrollViewer.MarkdownStyle>
+                <Style/>
+            </mdxam:MarkdownScrollViewer.MarkdownStyle>
+        </mdxam:MarkdownScrollViewer>
     </Grid>
 </hc:Window>
