@@ -13,6 +13,7 @@ namespace AI.NET.Windows
             Settings.SaveSettings(Settings.GetCurrentSettings());
             mem0GroupBox.DataContext = Service.AI.Mem0;
             opanAIGroupBox.DataContext = Service.AI.OpenAI;
+            aiGroupBox.DataContext = Service.AI.messages;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

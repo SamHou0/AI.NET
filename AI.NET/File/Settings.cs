@@ -1,6 +1,9 @@
-﻿using AI.NET.Logger;
+﻿using AI.NET.Data;
+using AI.NET.Logger;
+using HandyControl.Controls;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 
 namespace AI.NET.File
 {
@@ -18,7 +21,8 @@ namespace AI.NET.File
             SettingsModel settings = new()
             {
                 Mem0 = Service.AI.Mem0,
-                OpenAI = Service.AI.OpenAI
+                OpenAI = Service.AI.OpenAI,
+                SystemPrompt = Service.AI.messages.SystemPrompt
             };
             return settings;
         }
@@ -30,6 +34,7 @@ namespace AI.NET.File
         {
             Service.AI.Mem0 = model.Mem0;
             Service.AI.OpenAI = model.OpenAI;
+            Service.AI.messages.SystemPrompt = model.SystemPrompt;
         }
         /// <summary>
         /// Save settings to file
@@ -39,7 +44,6 @@ namespace AI.NET.File
             // Save settings to file
             try
             {
-
                 using (StreamWriter writer = new(settingsPath))
                 {
                     writer.Write(JsonSerializer.Serialize(model));
@@ -48,7 +52,7 @@ namespace AI.NET.File
             catch (Exception ex)
             {
                 Log.Error("Error saving settings", ex);
-                throw;
+                Growl.Error(new() { StaysOpen = true, Message = "Error saving settings" });
             }
         }
         /// <summary>
@@ -68,10 +72,12 @@ namespace AI.NET.File
                     return model;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Log.Error("Error reading settings", ex);
-                throw;
+               System.Windows.MessageBox.Show("Error reading settings, delete settings.json and try again. (This may appear after a major update. You can open that file and get your settings back.)"
+                   ,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                Environment.Exit(1);
+                return null;
             }
         }
     }
@@ -80,5 +86,6 @@ namespace AI.NET.File
     {
         public required Network.AI.OpenAI OpenAI { get; set; }
         public required Network.AI.Mem0 Mem0 { get; set; }
+        public required string SystemPrompt { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MdXaml;
+﻿using AI.NET.Data;
+using MdXaml;
 using OpenAI.Chat;
 
 namespace AI.NET.Service
@@ -13,8 +14,7 @@ namespace AI.NET.Service
         /// <summary>
         /// The global message storage
         /// </summary>
-        public static List<ChatMessage> messages = new() {new SystemChatMessage
-                ("Answer user's request based on memories and chat messages.") };
+        public static Messages messages = new();
         /// <summary>
         /// Request AI to generate a reply
         /// </summary>
@@ -28,6 +28,17 @@ namespace AI.NET.Service
             messages.Add(new AssistantChatMessage(
                 await OpenAI.GenerateReplyAsync(outputBox)));
         }
+        /// <summary>
+        /// Create a new chat session
+        /// </summary>
+        public static void ResetMessages()
+        {
+            messages.Reset();
+        }
+        public static List<ChatMessage> GetChatMessages()
+        {
+            return messages.MessageList;
+        }
 
         private static async Task HandleMemoryAsync(string message)
         {
@@ -37,10 +48,6 @@ namespace AI.NET.Service
             Mem0.AddMemoryAsync(message, "default_user");
             messages.Add(new SystemChatMessage("Memories about user: " + memoryString));
         }
-        public static void ResetMessages()
-        {
-            messages = new List<ChatMessage>
-            { new SystemChatMessage("Answer user's request based on memories and chat messages.") };
-        }
+
     }
 }

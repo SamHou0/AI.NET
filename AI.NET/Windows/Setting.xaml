@@ -4,13 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AI.NET"
-        xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:ai="clr-namespace:AI.NET.Network.AI"
-           mc:Ignorable="d"
+        xmlns:hc="https://handyorg.github.io/handycontrol" 
+        xmlns:ai="clr-namespace:AI.NET.Network.AI"
+        xmlns:data="clr-namespace:AI.NET.Data"
+        mc:Ignorable="d"
         Closing="Window_Closing"
         Title="Setting" Height="450" Width="500">
     <Grid>
         <hc:ScrollViewer>
             <StackPanel hc:TitleElement.TitleWidth="200">
+                <GroupBox x:Name="aiGroupBox" Header="AI" Margin="10" d:DataContext="{d:DesignInstance Type=data:Messages}">
+                    <StackPanel>
+                        <TextBox Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="System Prompt" Margin="10" Text="{Binding SystemPrompt}" AcceptsReturn="True" Padding="10" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </GroupBox>
                 <GroupBox x:Name="mem0GroupBox" Header="Mem0" Margin="10" d:DataContext="{d:DesignInstance Type=ai:Mem0}">
                     <StackPanel>
                         <CheckBox Margin="10" IsChecked="{Binding IsEnabled}">Use Mem0</CheckBox>

@@ -82,7 +82,7 @@ namespace AI.NET.Network.AI
             };
             ChatClient client = new(ModelName, _aiCredential, options);
             string message = "";
-            await foreach (StreamingChatCompletionUpdate update in client.CompleteChatStreamingAsync(Service.AI.messages))
+            await foreach (StreamingChatCompletionUpdate update in client.CompleteChatStreamingAsync(Service.AI.GetChatMessages()))
             {
                 if (update.ContentUpdate.Count > 0)
                 {

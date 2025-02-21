@@ -19,14 +19,14 @@
             <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5">About</Button>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="0,0,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <mdxam:MarkdownScrollViewer x:Name="outputBox" Grid.Row="0" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser" >
+            <mdxam:MarkdownScrollViewer x:Name="outputBox" Grid.Row="0" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser">
                 <mdxam:MarkdownScrollViewer.Style>
                     <Style/>
                 </mdxam:MarkdownScrollViewer.Style>
