@@ -13,8 +13,8 @@ A .NET AI client, built with WPF.
 - [x] Long-term memory with [Mem0](https://github.com/mem0ai/mem0) using [mem0-gui](https://github.com/SamHou0/mem0-gui)
 - [x] Custom OpenAI api
 - [ ] Reasoning model support
-- [ ] Chat history management
-- [ ] System Prompt template
+- [x] Chat history management
+- [x] System Prompt template
 
 ## Usage
 
