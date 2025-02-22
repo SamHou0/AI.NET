@@ -25,7 +25,6 @@ jobs:
           gh --version
           gh auth status
           gh auth setup-git
-          - name: Compress Artifact
       - name: Compress release artifact
         run: 7z a AI.NET.zip $env.PUBLISH_PATH
       - name: Create Release using gh CLI
