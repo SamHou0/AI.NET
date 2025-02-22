@@ -6,7 +6,8 @@ on:
   push:
     tags:
       - '*'  # On tag push
-
+permissions:
+  contents: write
 jobs:
   create_release:
     runs-on: windows-latest
