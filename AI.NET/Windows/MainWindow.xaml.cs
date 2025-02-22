@@ -15,6 +15,8 @@ namespace AI.NET.Windows
         {
             InitializeComponent();
             loadingCircle.Visibility = Visibility.Hidden;
+            topicBox.DataContext = Service.AI.Topics;
+            promptList.DataContext = Service.SystemPrompt.systemPrompts;
         }
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
@@ -54,18 +56,25 @@ namespace AI.NET.Windows
         {
             loadingCircle.Visibility = isBusy ? Visibility.Visible : Visibility.Hidden;
             sendButton.IsEnabled = !isBusy;
-            clearButton.IsEnabled = !isBusy;
-            clearContextButton.IsEnabled = !isBusy;
+            newButton.IsEnabled = !isBusy;
+            deleteChatButton.IsEnabled = !isBusy;
         }
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        private void NewChatButton_Click(object sender, RoutedEventArgs e)
         {
             userInputBox.Text = string.Empty;
+            if (promptList.SelectedIndex >= 0)
+                Service.AI.NewChat((Data.SystemPrompt)promptList.SelectedItem);
+            else
+                Growl.Error("No sys prompt selected. Go to sys prompt and set one, then choose it in the ListBox.");
+            topicBox.SelectedIndex = Service.AI.Topics.TopicList.Count - 1;
         }
 
-        private void ClearContextButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteChatButton_Click(object sender, RoutedEventArgs e)
         {
             outputBox.Markdown = string.Empty;
-            Service.AI.ResetMessages();
+            int index = topicBox.SelectedIndex;
+            Service.AI.DeleteMessages();
+            topicBox.SelectedIndex = index - 1;
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +89,26 @@ namespace AI.NET.Windows
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             About window = new About();
+            window.ShowDialog();
+        }
+
+        private async void TopicBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            // Ensure selection
+            if (topicBox.SelectedIndex < 0)
+            {
+                topicBox.SelectedIndex = 0;
+                return;
+            }
+            SetBusyState(true);
+            // Change topic
+            outputBox.Markdown = await Service.AI.Topics.CurrentTopic.GetMarkdownAsync();
+            SetBusyState(false);
+        }
+
+        private void SystemPromptButton_Click(object sender, RoutedEventArgs e)
+        {
+            SystemPrompt window = new SystemPrompt();
             window.ShowDialog();
         }
     }

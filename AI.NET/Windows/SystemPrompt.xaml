@@ -1,0 +1,29 @@
+﻿<hc:Window x:Class="AI.NET.Windows.SystemPrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AI.NET.Windows"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        xmlns:data="clr-namespace:AI.NET.Data"
+        Closing="Window_Closing"
+        Title="SystemPrompt" Height="450" Width="800">
+    <Grid d:DataContext="{d:DesignInstance Type=data:SystemPrompts}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextAlignment="Center" FontSize="30" Margin="10">Input your prompt, double click to edit</TextBlock>
+        <DataGrid x:Name="promptDataGrid" Grid.Row="1" ItemsSource="{Binding Prompts}"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Add" Click="AddButton_Click" Margin="5"/>
+            <Button Grid.Column="1" Content="Delete" Click="DeleteButton_Click" Margin="5"/>
+        </Grid>
+    </Grid>
+</hc:Window>

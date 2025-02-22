@@ -1,4 +1,5 @@
 ﻿using AI.NET.Data;
+using AI.NET.File;
 using MdXaml;
 using OpenAI.Chat;
 
@@ -14,7 +15,7 @@ namespace AI.NET.Service
         /// <summary>
         /// The global message storage
         /// </summary>
-        public static Messages messages = new();
+        public static Topics Topics { get; set; } = new();
         /// <summary>
         /// Request AI to generate a reply
         /// </summary>
@@ -22,22 +23,32 @@ namespace AI.NET.Service
         /// <param name="outputBox">The UI element to update</param>
         public static async Task RequestAIAsync(string message, MarkdownScrollViewer outputBox)
         {
-            messages.Add(new UserChatMessage(message));
+            Topics.CurrentTopic.Add(new Chat() { Content = message, Role = ChatMessageRole.User });
             if (Mem0.IsEnabled)
                 await HandleMemoryAsync(message);
-            messages.Add(new AssistantChatMessage(
-                await OpenAI.GenerateReplyAsync(outputBox)));
+            Topics.CurrentTopic.Add(new Chat()
+            {
+                Content = await OpenAI.GenerateReplyAsync(outputBox),
+                Role = ChatMessageRole.Assistant
+            });
+            //Save topics to file. No need to wait.
+            TopicsHelper.SaveTopicsAsync(Topics);
         }
         /// <summary>
-        /// Create a new chat session
+        /// Delete a chat session
         /// </summary>
-        public static void ResetMessages()
+        public static void DeleteMessages()
         {
-            messages.Reset();
+            Topics.RemoveAt(Topics.CurrentTopicIndex);
+            TopicsHelper.SaveTopicsAsync(Topics);
+        }
+        public static void NewChat(Data.SystemPrompt prompt)
+        {
+            Topics.Add(new(prompt));
         }
         public static List<ChatMessage> GetChatMessages()
         {
-            return messages.MessageList;
+            return Topics.CurrentTopic.ToChatMessageList();
         }
 
         private static async Task HandleMemoryAsync(string message)
@@ -46,8 +57,15 @@ namespace AI.NET.Service
             string memoryString = await Mem0.SearchMemoryAsync(message, "default_user");
             // Add Memory, no need to wait
             Mem0.AddMemoryAsync(message, "default_user");
-            messages.Add(new SystemChatMessage("Memories about user: " + memoryString));
+            Topics.CurrentTopic.Add(new Chat()
+            {
+                Role = ChatMessageRole.System,
+                Content = "Memories about user: " + memoryString
+            });
         }
-
+        public static void LoadTopics()
+        {
+            Topics = TopicsHelper.GetTopics();
+        }
     }
 }

@@ -5,35 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:AI.NET"
+        xmlns:data="clr-namespace:AI.NET.Data"
         mc:Ignorable="d"
         Activated="Window_Activated"
         Title="AI.NET" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <StackPanel>
                 <Button x:Name="settingButton" Click="SettingButton_Click" Margin="5">Setting</Button>
-            <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5">About</Button>
+                <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5">About</Button>
+                <Button x:Name="systemPromptButton" Click="SystemPromptButton_Click" Margin="5">Sys Prompt</Button>
             </StackPanel>
+            <Grid Grid.Row="1" d:DataContext="{d:DesignInstance Type=data:SystemPrompts}">
+                <ListBox x:Name="promptList" ItemsSource="{Binding Prompts}" DisplayMemberPath="Name"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="1" Margin="0,0,10,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <mdxam:MarkdownScrollViewer x:Name="outputBox" Grid.Row="0" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser">
-                <mdxam:MarkdownScrollViewer.Style>
-                    <Style/>
-                </mdxam:MarkdownScrollViewer.Style>
-            </mdxam:MarkdownScrollViewer>
-            <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource DarkDefaultBrush}" Height="5"/>
-            <TextBox x:Name="userInputBox" Grid.Row="2" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Left"/>
-            <Grid Grid.Row="3">
+            <StackPanel d:DataContext="{d:DesignInstance Type=data:Topics}">
+                <ComboBox x:Name="topicBox" DisplayMemberPath="Description" ItemsSource="{Binding TopicList, Mode=OneWay}" SelectedIndex="{Binding CurrentTopicIndex,Mode=TwoWay}" SelectionChanged="TopicBox_SelectionChanged"/>
+            </StackPanel>
+            <Grid Grid.Row="1" d:DataContext="{d:DesignInstance Type=data:Messages}">
+                <mdxam:MarkdownScrollViewer x:Name="outputBox" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser">
+                    <mdxam:MarkdownScrollViewer.Style>
+                        <Style/>
+                    </mdxam:MarkdownScrollViewer.Style>
+                </mdxam:MarkdownScrollViewer>
+            </Grid>
+            <GridSplitter Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource DarkDefaultBrush}" Height="5"/>
+            <TextBox x:Name="userInputBox" Grid.Row="3" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Left"/>
+            <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -43,8 +59,8 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30" Width="30" Margin="10,0,0,0">
                     <hc:LoadingCircle x:Name="loadingCircle" Height="30" Width="30"/>
                 </StackPanel>
-                <Button x:Name="clearButton" Grid.Column="1" Content="Clear(_C)" Click="ClearButton_Click"/>
-                <Button x:Name="clearContextButton" Grid.Column="2" Content="Clear Context(_T)" Click="ClearContextButton_Click"/>
+                <Button x:Name="newButton" Grid.Column="1" Content="New Chat(_C)" Click="NewChatButton_Click"/>
+                <Button x:Name="deleteChatButton" Grid.Column="2" Content="Delete Current Chat(_D)" Click="DeleteChatButton_Click"/>
             </Grid>
         </Grid>
     </Grid>
