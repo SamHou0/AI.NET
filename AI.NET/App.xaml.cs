@@ -1,5 +1,6 @@
 ﻿using AI.NET.Logger;
 using System.Windows;
+using System.Diagnostics;
 
 namespace AI.NET
 {
