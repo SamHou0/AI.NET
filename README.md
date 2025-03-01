@@ -39,3 +39,4 @@ Just download and run the app.
 - [MdXaml](https://github.com/whistyun/MdXaml)
 - [OpenAI-Dotnet](https://github.com/openai/openai-dotnet)
 - [Log4Net](https://github.com/apache/logging-log4net)
+- [FeatherIcons](https://github.com/feathericons/feather)
