@@ -1,4 +1,5 @@
 ﻿using AI.NET.Logger;
+using AI.NET.Resources.Strings;
 using HandyControl.Controls;
 using System.IO;
 using System.Net.Http;
@@ -33,7 +34,7 @@ namespace AI.NET.Windows
             {
                 using (HttpClient client = new())
                 {
-                    Growl.Info("Updating README.md...");
+                    Growl.Info(Strings.InfoReadmeUpdating);
                     var response = await client.GetAsync(url);
                     using (StreamWriter writer = new(filePath))
                     {
@@ -43,7 +44,7 @@ namespace AI.NET.Windows
                 using (StreamReader reader = new(filePath))
                 {
                     aboutBox.Markdown = await reader.ReadToEndAsync();
-                    Growl.Success("Successfully update README.md");
+                    Growl.Success(Strings.InfoReadmeUpdated);
                 }
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 ﻿using AI.NET.Logger;
 using System.Windows;
 using System.Diagnostics;
+using AI.NET.Resources.Strings;
 
 namespace AI.NET
 {
@@ -25,8 +26,8 @@ namespace AI.NET
             Log.Error("Unexpected exception", e.ExceptionObject as Exception);
 #if !DEBUG
             if (MessageBox.Show(
-                "An unexpected error occurred. Calm down, it's not your fault. We've saved the information to the logs subfolder in your app folder, please create a new bug report issue on GitHub with the logs. Do you want to go there now?",
-                "AI.NET", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                Strings.ExUnexpected,"AI.NET", MessageBoxButton.YesNo
+                , MessageBoxImage.Error) == MessageBoxResult.Yes)
             {
                 Process.Start("explorer.exe", "https://github.com/SamHou0/AI.NET/issues/new/choose");
             }

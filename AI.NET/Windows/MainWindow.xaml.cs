@@ -1,6 +1,7 @@
 ﻿using AI.NET.Data;
 using AI.NET.File;
 using AI.NET.Logger;
+using AI.NET.Resources.Strings;
 using HandyControl.Controls;
 using System.Windows;
 
@@ -30,7 +31,7 @@ namespace AI.NET.Windows
             }
             catch (Exception ex)
             {
-                Log.Error("Error restoring window position", ex);
+                Log.Error(Strings.ExWindowPosition, ex);
             }
 
         }
@@ -51,7 +52,7 @@ namespace AI.NET.Windows
             {
                 if (topicBox.Items.Count <= 0)
                 {
-                    Growl.Error(new() { StaysOpen = true, Message = "No topic selected. Please create a new chat first." });
+                    Growl.Error(new() { StaysOpen = true, Message = Strings.ExNoTopicSelection });
                     userInputBox.Text = input;//Recover input
                     return;
                 }
@@ -74,7 +75,7 @@ namespace AI.NET.Windows
                 Settings.ApplySettings(Settings.ReadSettings());
             else
                 Growl.Warning(new()
-                { StaysOpen = true, Message = "Please set your AI in the Settings first!" });
+                { StaysOpen = true, Message = Strings.ExAINotSet });
         }
         /// <summary>
         /// Set the busy state of the UI
@@ -92,7 +93,7 @@ namespace AI.NET.Windows
             if (promptList.SelectedIndex >= 0)
                 Service.AI.NewChat((Data.SystemPrompt)promptList.SelectedItem);
             else
-                Growl.Error("No sys prompt selected. Go to sys prompt and set one, then choose it in the ListBox.");
+                Growl.Error(Strings.ExNoSysPromptSelection);
             topicBox.SelectedIndex = Service.AI.Topics.TopicList.Count - 1;
         }
 
@@ -112,7 +113,7 @@ namespace AI.NET.Windows
             Setting window = new Setting();
             window.ShowDialog();
             Settings.ApplySettings(Settings.ReadSettings());
-            Growl.Success("Settings saved and applied!");
+            Growl.Success(Strings.InfoSettingSaved);
             Log.Info("Settings saved and applied");
         }
 

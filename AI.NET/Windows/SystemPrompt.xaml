@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AI.NET.Windows"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:strings="clr-namespace:AI.NET.Resources.Strings"
         mc:Ignorable="d"
         xmlns:data="clr-namespace:AI.NET.Data"
         Closing="Window_Closing"
@@ -15,7 +17,7 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock TextAlignment="Center" FontSize="30" Margin="10">Input your prompt, double click to edit</TextBlock>
+        <TextBlock TextAlignment="Center" FontSize="30" Margin="10" Text="{x:Static strings:Strings.SystemPromptInstruction}"/>
         <DataGrid x:Name="promptDataGrid" Grid.Row="1" ItemsSource="{Binding Prompts}"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

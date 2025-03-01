@@ -10,10 +10,10 @@
 
   <ItemGroup>
     <None Remove="Logger\Log4Net.config" />
-    <None Remove="Resources\icons\file-plus.svg" />
-    <None Remove="Resources\icons\send.svg" />
-    <None Remove="Resources\icons\terminal.svg" />
-    <None Remove="Resources\icons\trash.svg" />
+    <None Remove="Resources\Icons\file-plus.svg" />
+    <None Remove="Resources\Icons\send.svg" />
+    <None Remove="Resources\Icons\terminal.svg" />
+    <None Remove="Resources\Icons\trash.svg" />
     <None Remove="Resources\info.svg" />
     <None Remove="Resources\settings.svg" />
   </ItemGroup>
@@ -33,14 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\icons\file-plus.svg" />
-    <Resource Include="Resources\icons\info.svg" />
-    <Resource Include="Resources\icons\send.svg" />
-    <Resource Include="Resources\icons\settings.svg">
+    <Resource Include="Resources\Icons\file-plus.svg" />
+    <Resource Include="Resources\Icons\info.svg" />
+    <Resource Include="Resources\Icons\send.svg" />
+    <Resource Include="Resources\Icons\settings.svg">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\icons\terminal.svg" />
-    <Resource Include="Resources\icons\trash.svg" />
+    <Resource Include="Resources\Icons\terminal.svg" />
+    <Resource Include="Resources\Icons\trash.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +49,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Strings\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
