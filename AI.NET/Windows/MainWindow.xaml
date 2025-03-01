@@ -7,12 +7,14 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:AI.NET"
         xmlns:data="clr-namespace:AI.NET.Data"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
-        Activated="Window_Activated"
-        Title="AI.NET" Height="450" Width="800">
+        Activated="Window_Activated" Closing="Window_Closing"
+        Title="AI.NET" Height="500" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid>
@@ -21,15 +23,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel>
-                <Button x:Name="settingButton" Click="SettingButton_Click" Margin="5">Setting</Button>
-                <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5">About</Button>
-                <Button x:Name="systemPromptButton" Click="SystemPromptButton_Click" Margin="5">Sys Prompt</Button>
+                <Button x:Name="settingButton" Click="SettingButton_Click" Margin="5" ToolTip="Setting">
+                    <svgc:SvgViewbox Source="Resources/icons/settings.svg"></svgc:SvgViewbox>
+                </Button>
+                <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5" ToolTip="About">
+                    <svgc:SvgViewbox Source="Resources/icons/info.svg"></svgc:SvgViewbox>
+                </Button>
+                <Button x:Name="systemPromptButton" Click="SystemPromptButton_Click" ToolTip="System Prompt" Margin="5">
+                    <svgc:SvgViewbox Source="Resources/icons/terminal.svg"></svgc:SvgViewbox>
+                </Button>
             </StackPanel>
-            <Grid Grid.Row="1" d:DataContext="{d:DesignInstance Type=data:SystemPrompts}">
-                <ListBox x:Name="promptList" ItemsSource="{Binding Prompts}" DisplayMemberPath="Name"/>
-            </Grid>
         </Grid>
-        <Grid Grid.Column="1" Margin="0,0,10,0">
+        <Grid Grid.Column="2" Margin="0,0,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
@@ -49,19 +54,30 @@
             </Grid>
             <GridSplitter Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource DarkDefaultBrush}" Height="5"/>
             <TextBox x:Name="userInputBox" Grid.Row="3" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Left"/>
-            <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="sendButton" Grid.Column="0" Content="Send(_S)" Click="SendButton_Click" IsDefault="True"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30" Width="30" Margin="10,0,0,0">
-                    <hc:LoadingCircle x:Name="loadingCircle" Height="30" Width="30"/>
-                </StackPanel>
-                <Button x:Name="newButton" Grid.Column="1" Content="New Chat(_C)" Click="NewChatButton_Click"/>
-                <Button x:Name="deleteChatButton" Grid.Column="2" Content="Delete Current Chat(_D)" Click="DeleteChatButton_Click"/>
-            </Grid>
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <ToggleButton x:Name="sendButton" Style="{StaticResource ToggleButtonLoading}" Click="SendButton_Click" Margin="10,0,0,0" ToolTip="Send Message">
+                    <svgc:SvgViewbox Source="Resources/icons/send.svg"></svgc:SvgViewbox>
+                </ToggleButton>
+                <Button x:Name="newButton" Click="NewChatButton_Click" Margin="10,0,0,0" ToolTip="New Chat">
+                    <svgc:SvgViewbox Source="Resources/icons/file-plus.svg"></svgc:SvgViewbox>
+                </Button>
+                <Button x:Name="deleteChatButton" Click="DeleteChatButton_Click" Margin="10,0,0,0" ToolTip="Delete Current Chat">
+                    <svgc:SvgViewbox Source="Resources/icons/trash.svg"></svgc:SvgViewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" d:DataContext="{d:DesignInstance Type={x:Type data:SystemPrompts}}">
+            <ListBox Style="{DynamicResource ListBoxDark}" x:Name="promptList" ItemsSource="{Binding Prompts}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" Margin="0,5">
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Padding="5" Text="{Binding Name}" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </hc:Window>

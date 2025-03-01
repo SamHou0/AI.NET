@@ -1,4 +1,5 @@
-﻿using AI.NET.File;
+﻿using AI.NET.Data;
+using AI.NET.File;
 using AI.NET.Logger;
 using HandyControl.Controls;
 using System.Windows;
@@ -14,31 +15,58 @@ namespace AI.NET.Windows
         public MainWindow()
         {
             InitializeComponent();
-            loadingCircle.Visibility = Visibility.Hidden;
             topicBox.DataContext = Service.AI.Topics;
             promptList.DataContext = Service.SystemPrompt.systemPrompts;
+            //Apply user window position
+            try
+            {
+                Rect restoreBounds = Properties.Settings.Default.MainRestoreBounds;
+                WindowState = WindowState.Normal;
+                Left = restoreBounds.Left;
+                Top = restoreBounds.Top;
+                Width = restoreBounds.Width;
+                Height = restoreBounds.Height;
+                WindowState = Properties.Settings.Default.MainWindowState;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error restoring window position", ex);
+            }
+
         }
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(userInputBox.Text))
+            {
+                SetBusyState(false);//Avoid toggle button error
                 return;
+            }
+
             SetBusyState(true);
-            outputBox.Markdown += "User:" + userInputBox.Text + markdownNewLine;
-            outputBox.Markdown += "AI:";
             string input = userInputBox.Text;
             userInputBox.Text = string.Empty;
             // Request AI
             try
-            { await Service.AI.RequestAIAsync(input, outputBox); }
+            {
+                if (topicBox.Items.Count <= 0)
+                {
+                    Growl.Error(new() { StaysOpen = true, Message = "No topic selected. Please create a new chat first." });
+                    userInputBox.Text = input;//Recover input
+                    return;
+                }
+                await Service.AI.RequestAIAsync(input, outputBox);
+            }
             catch (Exception ex)
             {
                 Growl.Error(new() { StaysOpen = true, Message = ex.Message });
                 Log.Error("Error when requesting AI", ex);
             }
-
-            outputBox.Markdown += markdownNewLine;
-            SetBusyState(false);
+            finally
+            {
+                outputBox.Markdown += markdownNewLine;
+                SetBusyState(false);
+            }
         }
         private void Window_Activated(object sender, EventArgs e)
         {
@@ -54,14 +82,13 @@ namespace AI.NET.Windows
         /// <param name="isBusy">The busy state</param>
         private void SetBusyState(bool isBusy)
         {
-            loadingCircle.Visibility = isBusy ? Visibility.Visible : Visibility.Hidden;
+            sendButton.IsChecked = isBusy;
             sendButton.IsEnabled = !isBusy;
             newButton.IsEnabled = !isBusy;
             deleteChatButton.IsEnabled = !isBusy;
         }
         private void NewChatButton_Click(object sender, RoutedEventArgs e)
         {
-            userInputBox.Text = string.Empty;
             if (promptList.SelectedIndex >= 0)
                 Service.AI.NewChat((Data.SystemPrompt)promptList.SelectedItem);
             else
@@ -71,10 +98,13 @@ namespace AI.NET.Windows
 
         private void DeleteChatButton_Click(object sender, RoutedEventArgs e)
         {
-            outputBox.Markdown = string.Empty;
-            int index = topicBox.SelectedIndex;
-            Service.AI.DeleteMessages();
-            topicBox.SelectedIndex = index - 1;
+            if (topicBox.SelectedIndex >= 0&&topicBox.Items.Count>0)
+            {
+                outputBox.Markdown = string.Empty;
+                int index = topicBox.SelectedIndex;
+                Service.AI.DeleteMessages();
+                topicBox.SelectedIndex = index - 1;
+            }
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
@@ -95,21 +125,26 @@ namespace AI.NET.Windows
         private async void TopicBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             // Ensure selection
-            if (topicBox.SelectedIndex < 0)
+            if (topicBox.SelectedIndex >= 0 && topicBox.Items.Count > 0)
             {
-                topicBox.SelectedIndex = 0;
-                return;
+                SetBusyState(true);
+                // Change topic
+                outputBox.Markdown = await Service.AI.Topics.CurrentTopic.GetMarkdownAsync();
+                SetBusyState(false);
             }
-            SetBusyState(true);
-            // Change topic
-            outputBox.Markdown = await Service.AI.Topics.CurrentTopic.GetMarkdownAsync();
-            SetBusyState(false);
         }
 
         private void SystemPromptButton_Click(object sender, RoutedEventArgs e)
         {
             SystemPrompt window = new SystemPrompt();
             window.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.MainRestoreBounds = RestoreBounds;
+            Properties.Settings.Default.MainWindowState = WindowState;
+            Properties.Settings.Default.Save();
         }
     }
 }

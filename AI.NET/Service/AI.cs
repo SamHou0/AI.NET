@@ -1,5 +1,6 @@
 ﻿using AI.NET.Data;
 using AI.NET.File;
+using HandyControl.Controls;
 using MdXaml;
 using OpenAI.Chat;
 
@@ -10,6 +11,8 @@ namespace AI.NET.Service
     /// </summary>
     internal static class AI
     {
+        private static readonly string markdownNewLine =
+            Environment.NewLine + Environment.NewLine;
         public static Network.AI.OpenAI OpenAI { get; set; } = new();
         public static Network.AI.Mem0 Mem0 { get; set; } = new();
         /// <summary>
@@ -24,6 +27,8 @@ namespace AI.NET.Service
         public static async Task RequestAIAsync(string message, MarkdownScrollViewer outputBox)
         {
             Topics.CurrentTopic.Add(new Chat() { Content = message, Role = ChatMessageRole.User });
+            outputBox.Markdown += "User:" + message + markdownNewLine;
+            outputBox.Markdown += "AI:";
             if (Mem0.IsEnabled)
                 await HandleMemoryAsync(message);
             Topics.CurrentTopic.Add(new Chat()

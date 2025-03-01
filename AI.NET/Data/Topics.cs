@@ -47,7 +47,7 @@ namespace AI.NET.Data
         }
         public Topics()
         {
-            TopicList = new() { new() };
+            TopicList = new() {};
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
