@@ -1,4 +1,5 @@
-﻿using HandyControl.Controls;
+﻿using AI.NET.Logger;
+using HandyControl.Controls;
 using System.IO;
 using System.Net.Http;
 
@@ -28,19 +29,27 @@ namespace AI.NET.Windows
                     aboutBox.Markdown = await reader.ReadToEndAsync();
                 }
             }
-            using (HttpClient client = new())
+            try
             {
-                Growl.Info("Updating README.md...");
-                var response = await client.GetAsync(url);
-                using (StreamWriter writer = new(filePath))
+                using (HttpClient client = new())
                 {
-                    writer.Write(await response.Content.ReadAsStringAsync());
+                    Growl.Info("Updating README.md...");
+                    var response = await client.GetAsync(url);
+                    using (StreamWriter writer = new(filePath))
+                    {
+                        writer.Write(await response.Content.ReadAsStringAsync());
+                    }
+                }
+                using (StreamReader reader = new(filePath))
+                {
+                    aboutBox.Markdown = await reader.ReadToEndAsync();
+                    Growl.Success("Successfully update README.md");
                 }
             }
-            using (StreamReader reader = new(filePath))
+            catch (Exception ex)
             {
-                aboutBox.Markdown = await reader.ReadToEndAsync();
-                Growl.Success("Successfully update README.md");
+                Growl.Error(new() { StaysOpen = true, Message = ex.Message });
+                Log.Error("Error updating README.md", ex);
             }
         }
     }

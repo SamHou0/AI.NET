@@ -7,13 +7,12 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         mc:Ignorable="d"
-        Background="#FF4D4D4D"
         Initialized="Window_Initialized"
         Title="About" Height="450" Width="800">
     <Grid>
-        <mdxam:MarkdownScrollViewer Style="{StaticResource FlowDocumentScrollViewerBaseStyle}" x:Name="aboutBox" ClickAction="OpenBrowser" Syntax="Standard" >
+        <mdxam:MarkdownScrollViewer x:Name="aboutBox" ClickAction="OpenBrowser" Syntax="Standard" >
             <mdxam:MarkdownScrollViewer.MarkdownStyle>
-                <Style/>
+                <Style TargetType="FlowDocument" BasedOn="{x:Static mdxam:MarkdownStyle.SasabuneStandard}"/>
             </mdxam:MarkdownScrollViewer.MarkdownStyle>
         </mdxam:MarkdownScrollViewer>
     </Grid>

@@ -47,9 +47,9 @@
             </StackPanel>
             <Grid Grid.Row="1" d:DataContext="{d:DesignInstance Type=data:Messages}">
                 <mdxam:MarkdownScrollViewer x:Name="outputBox" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser">
-                    <mdxam:MarkdownScrollViewer.Style>
-                        <Style/>
-                    </mdxam:MarkdownScrollViewer.Style>
+                    <mdxam:MarkdownScrollViewer.MarkdownStyle>
+                        <Style TargetType="FlowDocument" BasedOn="{x:Static mdxam:MarkdownStyle.SasabuneStandard}"/>
+                    </mdxam:MarkdownScrollViewer.MarkdownStyle>
                 </mdxam:MarkdownScrollViewer>
             </Grid>
             <GridSplitter Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource DarkDefaultBrush}" Height="5"/>
