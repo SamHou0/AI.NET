@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AI.NET.Windows"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:ic="clr-namespace:FluentIcons.Wpf;assembly=FluentIcons.Wpf"
         xmlns:strings="clr-namespace:AI.NET.Resources.Strings"
         mc:Ignorable="d"
         xmlns:data="clr-namespace:AI.NET.Data"
@@ -24,8 +25,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Add" Click="AddButton_Click" Margin="5"/>
-            <Button Grid.Column="1" Content="Delete" Click="DeleteButton_Click" Margin="5"/>
+            <Button Grid.Column="0" Click="AddButton_Click" Margin="5">
+                <ic:FluentIcon Icon="Add"/>
+            </Button>
+            <Button Grid.Column="1" Click="DeleteButton_Click" Margin="5">
+                <ic:FluentIcon Icon="Delete"/>
+            </Button>
         </Grid>
     </Grid>
 </hc:Window>

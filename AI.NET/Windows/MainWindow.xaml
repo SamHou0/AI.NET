@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:ic="clr-namespace:FluentIcons.Wpf;assembly=FluentIcons.Wpf"
         xmlns:local="clr-namespace:AI.NET"
         xmlns:data="clr-namespace:AI.NET.Data"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
@@ -25,13 +26,13 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <Button x:Name="settingButton" Click="SettingButton_Click" Margin="5" ToolTip="{x:Static strings:Strings.Setting}">
-                    <svgc:SvgViewbox Source="Resources/Icons/settings.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="Settings"/>
                 </Button>
                 <Button x:Name="aboutButton" Click="AboutButton_Click" Margin="5" ToolTip="{x:Static strings:Strings.About}">
-                    <svgc:SvgViewbox Source="Resources/Icons/info.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="Info"/>
                 </Button>
                 <Button x:Name="systemPromptButton" Click="SystemPromptButton_Click" ToolTip="{x:Static strings:Strings.SystemPrompt}" Margin="5">
-                    <svgc:SvgViewbox Source="Resources/Icons/terminal.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="WindowConsole"/>
                 </Button>
             </StackPanel>
         </Grid>
@@ -57,13 +58,13 @@
             <TextBox x:Name="userInputBox" Grid.Row="3" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True" TextAlignment="Left"/>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
                 <ToggleButton x:Name="sendButton" Style="{StaticResource ToggleButtonLoading}" Click="SendButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.SendMessage}">
-                    <svgc:SvgViewbox Source="Resources/Icons/send.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="Send" IconVariant="Color" Foreground="#FF2CBB25"/>
                 </ToggleButton>
                 <Button x:Name="newButton" Click="NewChatButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.NewChat}">
-                    <svgc:SvgViewbox Source="Resources/Icons/file-plus.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="CommentAdd" IconVariant="Regular"/>
                 </Button>
                 <Button x:Name="deleteChatButton" Click="DeleteChatButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.DeleteChat}">
-                    <svgc:SvgViewbox Source="Resources/Icons/trash.svg"></svgc:SvgViewbox>
+                    <ic:FluentIcon Icon="Delete" IconVariant="Filled" Foreground="Red"/>
                 </Button>
             </StackPanel>
         </Grid>
