@@ -4,6 +4,7 @@ using AI.NET.Logger;
 using AI.NET.Resources.Strings;
 using HandyControl.Controls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AI.NET.Windows
 {
@@ -99,7 +100,7 @@ namespace AI.NET.Windows
 
         private void DeleteChatButton_Click(object sender, RoutedEventArgs e)
         {
-            if (topicBox.SelectedIndex >= 0&&topicBox.Items.Count>0)
+            if (topicBox.SelectedIndex >= 0 && topicBox.Items.Count > 0)
             {
                 outputBox.Markdown = string.Empty;
                 int index = topicBox.SelectedIndex;
@@ -146,6 +147,19 @@ namespace AI.NET.Windows
             Properties.Settings.Default.MainRestoreBounds = RestoreBounds;
             Properties.Settings.Default.MainWindowState = WindowState;
             Properties.Settings.Default.Save();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.N)
+                    NewChatButton_Click(sender, e);
+                else if (e.Key == Key.Enter)
+                    SendButton_Click(sender, e);
+                else if (e.Key == Key.D)
+                    DeleteChatButton_Click(sender, e);
+            }
         }
     }
 }

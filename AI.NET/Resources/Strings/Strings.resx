@@ -121,13 +121,13 @@
     <value>About</value>
   </data>
   <data name="DeleteChat" xml:space="preserve">
-    <value>Delete Current Chat</value>
+    <value>Delete Current Chat (Ctrl+D)</value>
   </data>
   <data name="Mem0ServerUrl" xml:space="preserve">
     <value>Mem0 Server URL</value>
   </data>
   <data name="NewChat" xml:space="preserve">
-    <value>New Chat</value>
+    <value>New Chat (Ctrl+N)</value>
   </data>
   <data name="OpenAIApiKey" xml:space="preserve">
     <value>OpenAI Api Key</value>
@@ -139,7 +139,7 @@
     <value>OpenAI Model</value>
   </data>
   <data name="SendMessage" xml:space="preserve">
-    <value>Send Message</value>
+    <value>Send Message (Ctrl+Enter)</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>

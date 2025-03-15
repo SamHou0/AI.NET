@@ -121,13 +121,13 @@
     <value>关于</value>
   </data>
   <data name="DeleteChat" xml:space="preserve">
-    <value>删除当前聊天</value>
+    <value>删除当前聊天 (Ctrl+D)</value>
   </data>
   <data name="Mem0ServerUrl" xml:space="preserve">
     <value>Mem0 服务器地址</value>
   </data>
   <data name="NewChat" xml:space="preserve">
-    <value>新建聊天</value>
+    <value>新建聊天 (Ctrl+N)</value>
   </data>
   <data name="OpenAIApiKey" xml:space="preserve">
     <value>OpenAI Api 密钥</value>
@@ -139,7 +139,7 @@
     <value>OpenAI 模型名称</value>
   </data>
   <data name="SendMessage" xml:space="preserve">
-    <value>发送聊天消息</value>
+    <value>发送聊天消息 (Ctrl+Enter)</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>设置</value>

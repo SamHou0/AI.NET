@@ -70,7 +70,7 @@ namespace AI.NET.Resources.Strings {
         }
         
         /// <summary>
-        ///   查找类似 Delete Current Chat 的本地化字符串。
+        ///   查找类似 Delete Current Chat (Ctrl+D) 的本地化字符串。
         /// </summary>
         public static string DeleteChat {
             get {
@@ -160,7 +160,7 @@ namespace AI.NET.Resources.Strings {
         }
         
         /// <summary>
-        ///   查找类似 New Chat 的本地化字符串。
+        ///   查找类似 New Chat (Ctrl+N) 的本地化字符串。
         /// </summary>
         public static string NewChat {
             get {
@@ -196,7 +196,7 @@ namespace AI.NET.Resources.Strings {
         }
         
         /// <summary>
-        ///   查找类似 Send Message 的本地化字符串。
+        ///   查找类似 Send Message (Ctrl+Enter) 的本地化字符串。
         /// </summary>
         public static string SendMessage {
             get {

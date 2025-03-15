@@ -11,7 +11,7 @@
         xmlns:strings="clr-namespace:AI.NET.Resources.Strings"
         mc:Ignorable="d"
         Activated="Window_Activated" Closing="Window_Closing"
-        Title="AI.NET" Height="500" Width="900">
+        Title="AI.NET" Height="500" Width="900" KeyDown="Window_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -46,7 +46,7 @@
             <StackPanel d:DataContext="{d:DesignInstance Type=data:Topics}">
                 <ComboBox x:Name="topicBox" DisplayMemberPath="Description" ItemsSource="{Binding TopicList, Mode=OneWay}" SelectedIndex="{Binding CurrentTopicIndex,Mode=TwoWay}" SelectionChanged="TopicBox_SelectionChanged"/>
             </StackPanel>
-            <Grid Grid.Row="1" d:DataContext="{d:DesignInstance Type=data:Messages}">
+            <Grid Grid.Row="1">
                 <mdxam:MarkdownScrollViewer x:Name="outputBox" Foreground="White" Syntax="Standard" ClickAction="OpenBrowser">
                     <mdxam:MarkdownScrollViewer.MarkdownStyle>
                         <Style TargetType="FlowDocument" BasedOn="{x:Static mdxam:MarkdownStyle.SasabuneStandard}"/>
