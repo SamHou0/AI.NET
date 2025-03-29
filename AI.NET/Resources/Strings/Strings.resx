@@ -177,4 +177,10 @@
   <data name="InfoReadmeUpdating" xml:space="preserve">
     <value>Updating README.md...</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
 </root>

@@ -14,6 +14,7 @@ namespace AI.NET.Windows
     public partial class MainWindow : HandyControl.Controls.Window
     {
         private readonly string markdownNewLine = Environment.NewLine + Environment.NewLine;
+        private bool isClosable = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +35,6 @@ namespace AI.NET.Windows
             {
                 Log.Error(Strings.ExWindowPosition, ex);
             }
-
         }
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
@@ -144,9 +144,17 @@ namespace AI.NET.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Properties.Settings.Default.MainRestoreBounds = RestoreBounds;
-            Properties.Settings.Default.MainWindowState = WindowState;
-            Properties.Settings.Default.Save();
+            if (isClosable)
+            {
+                Properties.Settings.Default.MainRestoreBounds = RestoreBounds;
+                Properties.Settings.Default.MainWindowState = WindowState;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -160,6 +168,17 @@ namespace AI.NET.Windows
                 else if (e.Key == Key.D)
                     DeleteChatButton_Click(sender, e);
             }
+        }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            isClosable = true;
+            Close();
+        }
+
+        private void ShowMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Show();
         }
     }
 }

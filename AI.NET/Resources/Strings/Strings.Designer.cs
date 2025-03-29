@@ -88,6 +88,15 @@ namespace AI.NET.Resources.Strings {
         }
         
         /// <summary>
+        ///   查找类似 Exit 的本地化字符串。
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 No sys prompt selected. Go to sys prompt and set one, then choose it in the ListBox. 的本地化字符串。
         /// </summary>
         public static string ExNoSysPromptSelection {
@@ -210,6 +219,15 @@ namespace AI.NET.Resources.Strings {
         public static string Setting {
             get {
                 return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Show 的本地化字符串。
+        /// </summary>
+        public static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
             }
         }
         

@@ -6,11 +6,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Logger\Log4Net.config" />
     <None Remove="Resources\Icons\file-plus.svg" />
+    <None Remove="Resources\Icons\icon.ico" />
+    <None Remove="Resources\Icons\icon.svg" />
     <None Remove="Resources\Icons\send.svg" />
     <None Remove="Resources\Icons\terminal.svg" />
     <None Remove="Resources\Icons\trash.svg" />
@@ -35,6 +38,8 @@
 
   <ItemGroup>
     <Resource Include="Resources\Icons\file-plus.svg" />
+    <Resource Include="Resources\Icons\icon.ico" />
+    <Resource Include="Resources\Icons\icon.svg" />
     <Resource Include="Resources\Icons\info.svg" />
     <Resource Include="Resources\Icons\send.svg" />
     <Resource Include="Resources\Icons\settings.svg">

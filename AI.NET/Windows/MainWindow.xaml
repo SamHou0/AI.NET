@@ -11,6 +11,7 @@
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:strings="clr-namespace:AI.NET.Resources.Strings"
         mc:Ignorable="d"
+        Icon="/Resources/Icons/icon.ico"
         Activated="Window_Activated" Closing="Window_Closing"
         Title="AI.NET" Height="500" Width="900" KeyDown="Window_KeyDown">
     <Grid>
@@ -80,6 +81,20 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <hc:NotifyIcon x:Name="icon">
+                <hc:NotifyIcon.Icon>
+                    <BitmapImage UriSource="/Resources/Icons/icon.ico"/>
+                </hc:NotifyIcon.Icon>
+                <hc:NotifyIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{x:Static strings:Strings.About}" Click="AboutButton_Click"/>
+                        <MenuItem Header="{x:Static strings:Strings.Setting}" Click="SettingButton_Click"/>
+                        <MenuItem Header="{x:Static strings:Strings.SystemPrompt}" Click="SystemPromptButton_Click"/>
+                        <MenuItem Header="{x:Static strings:Strings.Show}" Click="ShowMenuItem_Click"/>
+                        <MenuItem Header="{x:Static strings:Strings.Exit}" Click="ExitMenuItem_Click"/>
+                    </ContextMenu>
+                </hc:NotifyIcon.ContextMenu>
+            </hc:NotifyIcon>
         </Grid>
     </Grid>
 </hc:Window>
