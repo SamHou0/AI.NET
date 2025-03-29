@@ -2,6 +2,8 @@
 
 A .NET AI client, built with WPF.
 
+![Preview](./Pic/AI.NET.png)
+
 ![GitHub License](https://img.shields.io/github/license/SamHou0/AI.NET)
 [![.NET](https://github.com/SamHou0/AI.NET/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/SamHou0/AI.NET/actions/workflows/dotnet-desktop.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/SamHou0/AI.NET?label=Latest%20Version)](https://github.com/SamHou0/AI.NET/releases)
