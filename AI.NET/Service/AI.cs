@@ -40,11 +40,53 @@ namespace AI.NET.Service
             TopicsHelper.SaveTopicsAsync(Topics);
         }
         /// <summary>
-        /// Delete a chat session
+        /// Retry generating the last AI response
         /// </summary>
-        public static void DeleteMessages()
+        /// <param name="outputBox">The UI element to update</param>
+        public static async Task RetryLastResponseAsync(MarkdownScrollViewer outputBox)
         {
-            Topics.RemoveAt(Topics.CurrentTopicIndex);
+            var messages = Topics.CurrentTopic.MessageList;
+            
+            // Find the last user message and remove any subsequent AI/system messages
+            int lastUserIndex = -1;
+            for (int i = messages.Count - 1; i >= 0; i--)
+            {
+                if (messages[i].Role == ChatMessageRole.User)
+                {
+                    lastUserIndex = i;
+                    break;
+                }
+            }
+            
+            if (lastUserIndex == -1)
+            {
+                return; // No user message found to retry
+            }
+            
+            // Remove all messages after the last user message
+            while (messages.Count > lastUserIndex + 1)
+            {
+                messages.RemoveAt(messages.Count - 1);
+            }
+            
+            string lastUserMessage = messages[lastUserIndex].Content;
+            
+            // Update the output box to show we're retrying
+            string currentMarkdown = await Topics.CurrentTopic.GetMarkdownAsync();
+            outputBox.Markdown = currentMarkdown + "AI:";
+            
+            // Handle memory if enabled
+            if (Mem0.IsEnabled)
+                await HandleMemoryAsync(lastUserMessage);
+            
+            // Generate new AI response
+            Topics.CurrentTopic.Add(new Chat()
+            {
+                Content = await OpenAI.GenerateReplyAsync(outputBox),
+                Role = ChatMessageRole.Assistant
+            });
+            
+            // Save topics to file
             TopicsHelper.SaveTopicsAsync(Topics);
         }
         public static void NewChat(Data.SystemPrompt prompt)

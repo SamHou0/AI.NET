@@ -70,11 +70,11 @@ namespace AI.NET.Resources.Strings {
         }
         
         /// <summary>
-        ///   查找类似 Delete Current Chat (Ctrl+D) 的本地化字符串。
+        ///   查找类似 Retry Last AI Response (Ctrl+R) 的本地化字符串。
         /// </summary>
-        public static string DeleteChat {
+        public static string RetryGeneration {
             get {
-                return ResourceManager.GetString("DeleteChat", resourceCulture);
+                return ResourceManager.GetString("RetryGeneration", resourceCulture);
             }
         }
         
