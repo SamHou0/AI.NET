@@ -87,7 +87,7 @@ namespace AI.NET.Windows
             sendButton.IsChecked = isBusy;
             sendButton.IsEnabled = !isBusy;
             newButton.IsEnabled = !isBusy;
-            deleteChatButton.IsEnabled = !isBusy;
+            retryButton.IsEnabled = !isBusy;
         }
         private void NewChatButton_Click(object sender, RoutedEventArgs e)
         {
@@ -98,14 +98,25 @@ namespace AI.NET.Windows
             topicBox.SelectedIndex = Service.AI.Topics.TopicList.Count - 1;
         }
 
-        private void DeleteChatButton_Click(object sender, RoutedEventArgs e)
+        private async void RetryButton_Click(object sender, RoutedEventArgs e)
         {
             if (topicBox.SelectedIndex >= 0 && topicBox.Items.Count > 0)
             {
-                outputBox.Markdown = string.Empty;
-                int index = topicBox.SelectedIndex;
-                Service.AI.DeleteMessages();
-                topicBox.SelectedIndex = index - 1;
+                SetBusyState(true);
+                try
+                {
+                    await Service.AI.RetryLastResponseAsync(outputBox);
+                }
+                catch (Exception ex)
+                {
+                    Growl.Error(new() { StaysOpen = true, Message = ex.Message });
+                    Log.Error("Error when retrying AI response", ex);
+                }
+                finally
+                {
+                    outputBox.Markdown += markdownNewLine;
+                    SetBusyState(false);
+                }
             }
         }
 
@@ -165,8 +176,8 @@ namespace AI.NET.Windows
                     NewChatButton_Click(sender, e);
                 else if (e.Key == Key.Enter)
                     SendButton_Click(sender, e);
-                else if (e.Key == Key.D)
-                    DeleteChatButton_Click(sender, e);
+                else if (e.Key == Key.R)
+                    RetryButton_Click(sender, e);
             }
         }
 

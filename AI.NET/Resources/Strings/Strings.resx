@@ -120,8 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="DeleteChat" xml:space="preserve">
-    <value>Delete Current Chat (Ctrl+D)</value>
+  <data name="RetryGeneration" xml:space="preserve">
+    <value>Retry Last AI Response (Ctrl+R)</value>
   </data>
   <data name="Mem0ServerUrl" xml:space="preserve">
     <value>Mem0 Server URL</value>

@@ -64,8 +64,8 @@
                 <Button x:Name="newButton" Click="NewChatButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.NewChat}">
                     <ic:FluentIcon Icon="CommentAdd" IconVariant="Regular"/>
                 </Button>
-                <Button x:Name="deleteChatButton" Click="DeleteChatButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.DeleteChat}">
-                    <ic:FluentIcon Icon="Delete" IconVariant="Filled" Foreground="Red"/>
+                <Button x:Name="retryButton" Click="RetryButton_Click" Margin="10,0,0,0" ToolTip="{x:Static strings:Strings.RetryGeneration}">
+                    <ic:FluentIcon Icon="ArrowClockwise" IconVariant="Filled" Foreground="Orange"/>
                 </Button>
             </StackPanel>
         </Grid>
