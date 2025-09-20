@@ -123,8 +123,8 @@
   <data name="About" xml:space="preserve">
     <value>关于</value>
   </data>
-  <data name="DeleteChat" xml:space="preserve">
-    <value>删除当前聊天 (Ctrl+D)</value>
+  <data name="RetryGeneration" xml:space="preserve">
+    <value>重新生成 AI 回复 (Ctrl+R)</value>
   </data>
   <data name="Mem0ServerUrl" xml:space="preserve">
     <value>Mem0 服务器地址</value>
